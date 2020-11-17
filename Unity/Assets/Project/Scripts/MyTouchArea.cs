@@ -2,6 +2,7 @@
 
 	using SagoTouch;
 	using UnityEngine;
+	using UnityEngine.UI;
 	using Touch = SagoTouch.Touch;
 
 	public class MyTouchArea : MonoBehaviour {
@@ -14,6 +15,13 @@
 
 		[System.NonSerialized]
 		private TouchAreaObserver m_TouchAreaObserver;
+
+		#endregion
+
+		#region  SerializeFields
+
+		[SerializeField]
+		private Toggle m_TouchAreaToggle = null;
 
 		#endregion
 
@@ -33,6 +41,11 @@
 
 		#region Methods
 
+		public void ToggleTouchArea() {
+			this.TouchArea.enabled = this.m_TouchAreaToggle.isOn;
+			Debug.Log($"MyTouchArea::ToggleTouchArea:this.TouchArea.enabled<{this.TouchArea.enabled}>");
+		}
+
 		private void OnEnable() {
 			this.TouchAreaObserver.TouchUpDelegate = OnTouchUp;
 		}
@@ -48,10 +61,9 @@
 		private void OnReactTouchDown(TouchArea touchArea, Touch touch) {
 			Debug.Log("Touch Down", this);
 		}
+
 		#endregion
 
-
 	}
-
 
 }
