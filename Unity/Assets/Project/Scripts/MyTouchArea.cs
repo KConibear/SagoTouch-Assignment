@@ -47,19 +47,21 @@
 		}
 
 		private void OnEnable() {
-			this.TouchAreaObserver.TouchUpDelegate = OnTouchUp;
+			this.TouchAreaObserver.TouchUpDelegate += OnReactTouchUp;
+			this.TouchAreaObserver.TouchDownDelegate += OnReactTouchDown;
 		}
 
 		private void OnDisable() {
-			this.TouchAreaObserver.TouchUpDelegate = null;
+			this.TouchAreaObserver.TouchUpDelegate -= OnReactTouchUp;
+			this.TouchAreaObserver.TouchDownDelegate -= OnReactTouchDown;
 		}
 
-		public void OnTouchUp(TouchArea touchArea, Touch touch) {
-			Debug.Log("Touch Up", this);
+		private void OnReactTouchUp(TouchArea touchArea, Touch touch) {
+			Debug.Log("Touch Up");
 		}
 
 		private void OnReactTouchDown(TouchArea touchArea, Touch touch) {
-			Debug.Log("Touch Down", this);
+			Debug.Log("Touch Down");
 		}
 
 		#endregion
